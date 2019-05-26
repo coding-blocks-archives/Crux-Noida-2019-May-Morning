@@ -52,7 +52,7 @@ public class ArrayIntroduction {
         int max = 0;
 
         for (int i = 0; i < nums.length; i++) {
-            if (nums[i] < nums[max]){
+            if (nums[i] > nums[max]){
                 max = i;
             }
         }
@@ -63,7 +63,7 @@ public class ArrayIntroduction {
         int max = start;
 
         for (int i = start; i <= end; i++) {
-            if (nums[i] < nums[max]){
+            if (nums[i] > nums[max]){
                 max = i;
             }
         }
