@@ -16,7 +16,15 @@ public class UpTriangle {
             int col = 0;
 
             while (col <= row) {
-                System.out.print("* ");
+                if (col == 0 || col == row) {
+                    if (row == 0){
+                        System.out.print("1");
+                    } else {
+                        System.out.print(row + "");
+                    }
+                } else {
+                    System.out.print("0");
+                }
                 col = col + 1;
             }
 
