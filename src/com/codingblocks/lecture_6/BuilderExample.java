@@ -15,25 +15,7 @@ public class BuilderExample {
 
 
 
-        System.out.println(builder.length());
-
-        arms(200, 400);
-
-
     }
 
 
-    public static void arms(int start, int end){
-
-        for (int i = start; i <= end ; i++) {
-            if (isArm(i)){
-                System.out.println(i);
-            }
-        }
-
-    }
-
-    public static boolean isArm(int num){
-        return true;
-    }
 }
