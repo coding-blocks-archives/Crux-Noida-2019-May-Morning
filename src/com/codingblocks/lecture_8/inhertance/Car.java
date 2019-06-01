@@ -15,4 +15,8 @@ public class Car {
     public void brake(){
         System.out.println("Brake like a generic Car");
     }
+
+    public static  void bakwas(){
+        System.out.println("bakwas of generic");
+    }
 }

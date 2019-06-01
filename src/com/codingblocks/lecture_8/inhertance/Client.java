@@ -4,6 +4,13 @@ import java.io.FileNotFoundException;
 
 public class Client {
     public static void main(String[] args) {
+
+
+        WonderCar c = new WonderCar();
+
+        WonderCar.bakwas();
+
+
         WonderCar wonder  = new WonderCar();
 
         System.out.println(wonder.door);
@@ -12,6 +19,7 @@ public class Client {
         wonder.start();
         wonder.stop();
         wonder.fly();
+
 
 
         Car generic  = new WonderCar();

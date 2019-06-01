@@ -2,7 +2,7 @@ package com.codingblocks.lecture_7.oop;
 
 public class Human {
 
-    String name;
+    public String name;
     int age;
     int money = 3000;
 

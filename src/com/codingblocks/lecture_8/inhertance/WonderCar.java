@@ -12,5 +12,10 @@ public class WonderCar extends Car {
     @Override
     public void start() {
         System.out.println("Start like a wonder car");
+        fly();
+    }
+
+    public static  void bakwas(){
+        System.out.println("bakwas of wonder");
     }
 }
