@@ -4,17 +4,21 @@ public class LLClient {
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
         list.insertFirst("Lalit");
-        list.insertFirst("Mohini");
-        list.insertLast("Neha");
+        list.insertFirst("Lalit");
+        list.insertFirst("Lalit");
+        list.insertFirst("Lalit");
+        list.insertFirst("Lalit");
+
+        list.insert(0, "Shivam");
+        list.insert(0, "Shivam");
+        list.insert(0, "Shivam");
+        list.insert(0, "Shivam");
 
         list.display();
 
-        list.insert(1, "Shivam");
+        list.reverse();
 
         list.display();
 
-        list.oddEven();
-
-        list.display();
     }
 }

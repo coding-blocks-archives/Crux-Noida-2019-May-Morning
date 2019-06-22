@@ -50,6 +50,55 @@ public class LinkedList {
         size++;
     }
 
+    public void removeDup(){
+        Node node = head;
+
+        while (node.next != null){
+            if (node.value.equals(node.next.value)){
+                node.next = node.next.next;
+                size--;
+            } else {
+                node = node.next;
+            }
+        }
+
+        tail = node;
+    }
+
+    public void removeDupRec(){
+        removeDupRec(head);
+    }
+
+    private void removeDupRec(Node node){
+        if (node.next == null){
+            tail = node;
+            return;
+        }
+
+        if (node.value.equals(node.next.value)){
+            node.next = node.next.next;
+            size--;
+            removeDupRec(node);
+        } else {
+            removeDupRec(node.next);
+        }
+    }
+
+    public void reverse(){
+        Node prev = null;
+        Node present = head;
+
+        while (present != null){
+            Node next = present.next;
+            present.next = prev;
+            prev = present;
+            present = next;
+        }
+
+        tail = head;
+        head = prev;
+    }
+
     public String deleteFirst(){
         String value = head.value;
         head = head.next;
