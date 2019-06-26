@@ -1,5 +1,7 @@
 package com.codingblocks.lecture_21;
 
+import java.util.Arrays;
+
 public class BSTGeneric <T extends Comparable<T>>{
 
     private Node root;
@@ -79,6 +81,56 @@ public class BSTGeneric <T extends Comparable<T>>{
         boolean right = isBST(node.right, node.value, end);
 
         return present && left && right;
+    }
+
+    public void populateFromSorted(T[] nums) {
+        this.root = populateFromSorted(nums, 0, nums.length - 1);
+    }
+
+    private Node populateFromSorted(T[] nums, int start, int end) {
+        if (start > end){
+            return null;
+        }
+
+        int mid = (start + end) / 2;
+        Node node = new Node(nums[mid]);
+        node.left = populateFromSorted(nums, start, mid - 1);
+        node.right = populateFromSorted(nums, mid + 1, end);
+        return node;
+    }
+
+    public void populateFromPreIn(T[] pre, T[] in){
+        this.root = populateFromPreInRec(pre, in);
+    }
+
+    private Node populateFromPreInRec(T[] pre, T[] in) {
+
+        if(pre.length == 0){
+            return null;
+        }
+
+        T value = pre[0];
+        int index = find(in, value);
+        T[] in_left = Arrays.copyOfRange(in, 0, index);
+        T[] in_right = Arrays.copyOfRange(in, index+1  , in.length);
+
+        T[] pre_left = Arrays.copyOfRange(pre, 1, index + 1);
+        T[] pre_right = Arrays.copyOfRange(pre, index+1  , pre.length);
+
+        Node node = new Node(value);
+        node.left = populateFromPreInRec(pre_left, in_left);
+        node.right = populateFromPreInRec(pre_right, in_right);
+
+        return node;
+    }
+
+    private int find(T[] array, T value) {
+        for (int i = 0; i < array.length; i++) {
+            if (array[i].compareTo(value) == 0){
+                return i;
+            }
+        }
+        return -1;
     }
 
     private class Node {
