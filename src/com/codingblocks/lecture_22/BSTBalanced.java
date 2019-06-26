@@ -20,8 +20,32 @@ public class BSTBalanced<T extends Comparable<T>>{
         }
 
         node.height = 1 + Math.max(height(node.left), height(node.right));
+        node = balance(node);
+
 
         return node;
+    }
+
+    private Node balance(Node node) {
+        if (height(node.left) - height(node.right) > 1){
+            if (height(node.left.left) - height(node.left.right) < 0){
+                node.left = leftRotate(node.left);
+            }
+            node = rightRotate(node);
+        }
+
+        if (height(node.right) - height(node.left) > 1){
+            if (height(node.right.right) - height(node.right.left) < 0){
+                node.right = rightRotate(node.right);
+            }
+            node = leftRotate(node);
+        }
+
+        return node;
+    }
+
+    public int height(){
+        return height(root);
     }
 
     public boolean isBalanced(){
@@ -72,6 +96,8 @@ public class BSTBalanced<T extends Comparable<T>>{
         x.left = y;
         y.right = t2;
 
+        y.height = 1 + Math.max(height(y.left), height(y.right));
+        x.height = 1 + Math.max(height(x.left), height(x.right));
         return x;
     }
 
@@ -86,6 +112,9 @@ public class BSTBalanced<T extends Comparable<T>>{
         y.right = x;
         x.left = t2;
 
+        x.height = 1 + Math.max(height(x.left), height(x.right));
+        y.height = 1 + Math.max(height(y.left), height(y.right));
+
         return y;
     }
 
@@ -97,7 +126,7 @@ public class BSTBalanced<T extends Comparable<T>>{
 
         public Node(T value) {
             this.value = value;
-            height = 1;
+            this.height = 1;
         }
     }
 }
