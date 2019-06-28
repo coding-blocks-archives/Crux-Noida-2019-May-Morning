@@ -23,7 +23,13 @@ public class TableExample {
 //
 //        System.out.println(dict.get("apple"));
 
-        System.out.println("om".hashCode());
+//        System.out.println("om".hashCode());
+
+        CombinedHashTable<Integer, Integer> table = new CombinedHashTable<>();
+
+        for (int i = 0; i < 1000000; i++) {
+            table.put(i, i);
+        }
 
     }
 
