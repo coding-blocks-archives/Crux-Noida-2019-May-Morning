@@ -79,6 +79,52 @@ public class AdjListGraph <E> {
         return components;
     }
 
+    public boolean bipart(){
+
+        Set<Vertex> set = new HashSet<>();
+        Set<Vertex> red = new HashSet<>();
+        Set<Vertex> black = new HashSet<>();
+        Stack<Vertex> stack = new Stack<>();
+
+        for (Vertex vertex : vertexMap.values()) {
+
+            if (set.contains(vertex)){
+                continue;
+            }
+
+
+            set.add(vertex);
+            red.add(vertex);
+            stack.push(vertex);
+
+            while (!stack.empty()){
+                Vertex top = stack.pop();
+
+                for (Vertex padosi : top.neighbours) {
+                    if (red.contains(top)){
+                        if (!set.contains(padosi)){
+                            set.add(padosi);
+                            black.add(padosi);
+                            stack.push(padosi);
+                        } else if (red.contains(padosi)){
+                            return false;
+                        }
+                    } else {
+                        if (!set.contains(padosi)){
+                            set.add(padosi);
+                            red.add(padosi);
+                            stack.push(padosi);
+                        } else if (black.contains(padosi)){
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+
     public boolean isConnected(){
         return connectedComponents().size() <= 1;
     }

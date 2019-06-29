@@ -14,12 +14,15 @@ public class GraphClient {
 
         graph.addEdge("A", "B");
         graph.addEdge("B", "C");
+        graph.addEdge("A", "C");
 
         graph.addEdge("F", "G");
 
 //        graph.DFT("A");
 
-        System.out.println(graph.connectedComponents());
+//        System.out.println(graph.connectedComponents());
+
+        System.out.println(graph.bipart());
 
 //
 //
