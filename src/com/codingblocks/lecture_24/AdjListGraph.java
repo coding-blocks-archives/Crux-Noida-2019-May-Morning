@@ -45,6 +45,74 @@ public class AdjListGraph <E> {
         }
     }
 
+    public LinkedList<LinkedList<E>> connectedComponents(){
+        Set<Vertex> set = new HashSet<>();
+        Stack<Vertex> stack = new Stack<>();
+
+        LinkedList<LinkedList<E>> components = new LinkedList<>();
+
+        for (Vertex vertex : vertexMap.values()) {
+
+            if (set.contains(vertex)){
+                continue;
+            }
+
+            LinkedList<E> component = new LinkedList<>();
+
+            set.add(vertex);
+            stack.push(vertex);
+
+            while (!stack.empty()){
+                Vertex top = stack.pop();
+                component.add(top.value);
+                for (Vertex padosi : top.neighbours) {
+                    if (!set.contains(padosi)){
+                        set.add(padosi);
+                        stack.push(padosi);
+                    }
+                }
+            }
+
+            components.add(component);
+        }
+
+        return components;
+    }
+
+    public boolean isConnected(){
+        return connectedComponents().size() <= 1;
+    }
+
+
+    public boolean DFS(E value, E target){
+        Set<Vertex> set = new HashSet<>();
+        Stack<Vertex> stack = new Stack<>();
+
+        Vertex vertex = vertexMap.get(value);
+        set.add(vertex);
+        stack.push(vertex);
+
+        while (!stack.empty()){
+            Vertex top = stack.pop();
+            if (target.equals(top.value)){
+                return true;
+            }
+
+            for (Vertex padosi : top.neighbours) {
+                if (target.equals(padosi.value)){
+                    return true;
+                }
+
+                if (!set.contains(padosi)){
+                    set.add(padosi);
+                    stack.push(padosi);
+                }
+            }
+        }
+
+        return false;
+    }
+
     public void BFT(E value){
         Set<Vertex> set = new HashSet<>();
         Queue<Vertex> queue = new LinkedList<>();
@@ -63,6 +131,41 @@ public class AdjListGraph <E> {
                 }
             }
         }
+    }
+
+    public int BFT(E value, E target){
+        Set<Vertex> set = new HashSet<>();
+        Queue<Vertex> queue = new LinkedList<>();
+
+        Vertex vertex = vertexMap.get(value);
+        set.add(vertex);
+        queue.add(vertex);
+        queue.add(null);
+
+        int distance = 0;
+
+        while (queue.size() > 1){
+            Vertex top = queue.remove();
+
+            if (top == null){
+                distance++;
+                queue.add(null);
+                continue;
+            }
+
+            if(top.value.equals(target)){
+                return distance;
+            }
+
+            for (Vertex padosi : top.neighbours) {
+                if (!set.contains(padosi)){
+                    set.add(padosi);
+                    queue.add(padosi);
+                }
+            }
+        }
+
+        return -1;
     }
 
     public void display(){
