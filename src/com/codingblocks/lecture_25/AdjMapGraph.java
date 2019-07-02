@@ -73,6 +73,36 @@ public class AdjMapGraph<E> {
         }
 
         return spanning;
+    }
+
+    public int prims(){
+        Vertex first = vertexMap.values().iterator().next();
+        Set<Vertex> visited = new HashSet<>();
+        PriorityQueue<Edge> queue = new PriorityQueue<>((o1, o2) -> o1.weight - o2.weight);
+        for (Vertex padosi : first.neighbours.values()) {
+            int weight = first.weights.get(padosi.value);
+            queue.add(new Edge(first, padosi, weight));
+        }
+        visited.add(first);
+
+        int sum = 0;
+
+        while (!queue.isEmpty()){
+            Edge front = queue.remove();
+            if (!visited.contains(front.end)){
+               sum += front.weight;
+               Vertex end = front.end;
+               visited.add(end);
+                for (Vertex padosi : end.neighbours.values()) {
+                    if (!visited.contains(padosi)){
+                        int weight = end.weights.get(padosi.value);
+                        queue.add(new Edge(end, padosi, weight));
+                    }
+                }
+            }
+        }
+
+        return sum;
 
     }
 

@@ -24,5 +24,7 @@ public class Client {
         graph.display();
         System.out.println("--------------");
         spanning.display();
+
+        System.out.println(graph.prims());
     }
 }
